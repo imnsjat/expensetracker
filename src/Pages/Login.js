@@ -57,7 +57,9 @@ const Login = () => {
             navigate('/welcome')
         }
         else{
-            createAccountHandler()
+            // createAccountHandler()
+            navigate('/verifyemail')
+
         }
       } else {
         const data = await res.json();
