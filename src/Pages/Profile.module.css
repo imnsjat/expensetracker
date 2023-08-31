@@ -1,0 +1,75 @@
+.title {
+    display: flex;
+        border-top: 5px solid #969696;
+        background-color: #000000;
+        height: auto;
+        line-height: 30px;
+        padding: 4px 6px;
+        font-size: 25px;
+        color: #b097c6;
+        margin-bottom: 13px;
+        clear: both;
+}   
+.message {
+    flex: 1; 
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.h1 {
+    margin-right: auto;
+    text-shadow: #969696;
+    font-weight: bold;
+    font-style: italic; /* Add this line to make the text italic */
+    color: #b4c02b
+}
+.form {
+    margin: auto;
+    border: 2px solid gray;
+    padding: 40px;
+    width: 500px;
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    box-shadow: 0 0 7px gray;
+    border: none;
+  }
+  
+  .form label {
+    display: block;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  .form input {
+    padding: 10px;
+    margin-bottom: 1em;
+    width: 95%;
+    font-size: 18px;
+    border-radius: 5px;
+    border-color: rgb(0, 0, 0, 0.2);
+  }
+  
+  .form div {
+    text-align: center;
+  }
+  
+  .form button {
+    width: 100%;
+    font-size: 25px;
+    margin-top: 30px;
+    padding: 8px 30px 8px 30px;
+    border-radius: 25px;
+    border: none;
+    background-color: #ccc;
+    /* box-shadow: 0 0 10px rgb(133, 255, 58); */
+  }
+  
+  .form button:hover {
+    background-color: #00ff99;
+  }
+  
+  .form button:active {
+    transform: scale(0.95);
+  }
