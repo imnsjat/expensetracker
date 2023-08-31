@@ -46,13 +46,19 @@ const Login = () => {
       if (res.ok) {
         // console.log(history);
         // history.replace("/home");
-        navigate('/home')
+        
         const data = await res.json();
         // const convertedData = JSON.stringify(data);
         // console.log('converted data go in local' , convertedData);
         // console.log('data go in loginctx token' , data.idToken
         // )
         loginCtx.login(data.idToken);
+        if(loginAccount){  
+            navigate('/home')
+        }
+        else{
+            createAccountHandler()
+        }
       } else {
         const data = await res.json();
         throw new Error(data.error.message);
