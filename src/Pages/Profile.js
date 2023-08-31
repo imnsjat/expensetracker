@@ -1,12 +1,14 @@
 import React, { useRef, useContext,  useEffect , useState} from "react";
 import classes from './Profile.module.css'
 import loginContext from "../Store/Login-Context";
+import { useNavigate } from "react-router-dom";
 const   Profile = ()=>{
 
     //   const navigate = useNavigate();
       const loginCtx = useContext(loginContext);
       const name = useRef();
       const photourl = useRef();
+      const navigate = useNavigate();
       
       const profileLoadHandler = async () =>{
         const token = loginCtx.tokenId
@@ -27,8 +29,11 @@ const   Profile = ()=>{
           if (res.ok) {
             const data = await res.json();
             // console.log('data recieved',data)
-            name.current.value = data.users[0].displayName
-            photourl.current.value = data.users[0].photoUrl
+            let namee = data.users[0].displayName 
+            let purl = data.users[0].photoUrl
+            name.current.value = (namee) ? namee : ''
+            photourl.current.value = (purl)  ? purl : ''
+            
 
           } else {
             const data = await res.json();
@@ -69,7 +74,7 @@ const   Profile = ()=>{
           if (res.ok) {
             const data = await res.json();
             console.log('data recieved update',data)
-            // navigate('/welcome')
+            navigate('/welcome')
           } else {
             const data = await res.json();
             throw new Error(data.error.message);
