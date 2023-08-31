@@ -1,0 +1,67 @@
+.form{
+    margin-top: 20px;
+    padding-top: 2%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px #042417;
+    /* background-color: #000000; */
+}
+
+.form label {
+    /* margin-left: auto; */
+    display: inline-flex;
+    color: antiquewhite;
+    width: auto;
+    font-size: 15px;
+    margin-top: auto;
+    padding:10px;
+    border-radius: 25px;
+    border: 2px #042417;
+    background-color: #292424;
+    /* box-shadow: 0 0 10px rgb(133, 255, 58); */
+  }
+  .form button {
+    /* margin-left: auto; */
+    display: inline-flex;
+    color: antiquewhite;
+    width: auto;
+    font-size: 15px;
+    margin-top: auto;
+    padding:10px;
+    border-radius: 25px;
+    border: 2px #042417;
+    background-color: #292424;
+    /* box-shadow: 0 0 10px rgb(133, 255, 58); */
+  }
+  
+  .form button:hover {
+    background-color: #0e6140;
+  }
+  
+  .form button:active {
+    transform: scale(0.95);
+  }
+  .form input{
+    width: auto;
+    padding: 10px 20px;
+    cursor:pointer;
+    display:inline-flex;
+    font-weight: bold;
+    border: 2px solid ;
+    border-radius: 4px;
+    
+  }
+  .form input:hover {
+    background-color: #4579af;
+    color: #fafa47;
+  }
+  .form select {
+    width: auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    appearance:none; /* Remove default arrow in some browsers */
+    background-size: 30px; /* Set the size of the arrow icon */
+  }

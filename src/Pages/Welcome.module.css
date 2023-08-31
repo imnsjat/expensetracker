@@ -44,3 +44,22 @@
   .button:active {
     transform: scale(0.95);
   }
+
+  .form button {
+    width: 100%;
+    font-size: 25px;
+    margin-top: 30px;
+    padding: 8px 30px 8px 30px;
+    border-radius: 25px;
+    border: none;
+    background-color: #ccc;
+    /* box-shadow: 0 0 10px rgb(133, 255, 58); */
+  }
+  
+  .form button:hover {
+    background-color: #00ff99;
+  }
+  
+  .form button:active {
+    transform: scale(0.95);
+  }

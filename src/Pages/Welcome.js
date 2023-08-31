@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import classes from './Welcome.module.css'
 import { Link, useNavigate } from 'react-router-dom';
 import loginContext from '../Store/Login-Context';
+import ExpenseForm from '../Components/ExpenseForm';
 
 const Welcome = ()=>{
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Welcome = ()=>{
         navigate('/');
     }
     return (
+        <>
         <div className={classes.title}>
             <span className={classes.h1}>Welcome to expense Tracker</span>
             <button className={classes.button} onClick={logoutHandler}>Logout</button>
@@ -26,6 +28,8 @@ const Welcome = ()=>{
             </span>
             
         </div>
+        <ExpenseForm className={classes.form}/>
+        </>
     )
 };
 export default Welcome;
