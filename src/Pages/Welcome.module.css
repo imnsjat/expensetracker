@@ -1,0 +1,25 @@
+.title {
+    display: flex;
+        border-top: 5px solid #969696;
+        background-color: #76db95;
+        height: auto;
+        line-height: 30px;
+        padding: 4px 6px;
+        font-size: 25px;
+        color: #000000;
+        margin-bottom: 13px;
+        clear: both;
+}   
+.message {
+    flex: 1; 
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.h1 {
+    margin-right: auto;
+}
+.sp {
+    color: rgb(255, 72, 0);
+    display: inline-block;
+}

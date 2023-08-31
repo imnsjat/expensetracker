@@ -54,7 +54,7 @@ const Login = () => {
         // )
         loginCtx.login(data.idToken);
         if(loginAccount){  
-            navigate('/home')
+            navigate('/welcome')
         }
         else{
             createAccountHandler()
