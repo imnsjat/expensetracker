@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import classes from './ExpenseForm.module.css'
 
-const ExpenseForm = ()=> {
+const ExpenseForm = ({ onActivatePremium })=> {
 
   const [formData, setFormData] = useState({
     amount: '',
@@ -14,6 +14,12 @@ const ExpenseForm = ()=> {
   const [editId, setEditId] = useState(null);
 
   const [totalExpenses, setTotalExpenses] = useState(0);
+  const [isPremiumActive, setIsPremiumActive] = useState(false);
+
+  const handleActivatePremium = () => {
+    setIsPremiumActive(true);
+    onActivatePremium();
+  };
 
   useEffect(() => {
     setTotalExpenses(
@@ -152,6 +158,29 @@ const ExpenseForm = ()=> {
       alert(err.message);
     }
   };
+  const handleDownloadExpenses = () => {
+    // Generate the CSV data
+
+  let csvContent = 'Amount,Description,Category\n'; // Header row
+
+  expenses.forEach(expense => {
+    csvContent += `${expense.amount},${expense.description},${expense.category}\n`;
+  });
+
+  // Create a Blob object from the CSV data
+  const csvBlob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+  // Create a download link for the Blob object
+  const csvUrl = URL.createObjectURL(csvBlob);
+
+  // Trigger the download
+  const link = document.createElement('a');
+  link.href = csvUrl;
+  link.setAttribute('download', 'expenses.csv');
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  };
 
     return(
         <>
@@ -178,8 +207,10 @@ const ExpenseForm = ()=> {
     </form>
     {expenses !== null && (
         <> {totalExpenses > 10000 && (
-          <button className={classes.premiumbutton}>Activate Premium</button>
+          <button className={classes.premiumbutton} onClick={handleActivatePremium}>Activate Premium</button>
         )}
+        
+    {isPremiumActive && <button onClick={handleDownloadExpenses}>Download Expenses</button>}
           <h2>Expenses:</h2>
           {expenses.map((expense, index) => (
             <div key={index}>

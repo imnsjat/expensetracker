@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.dark-theme {
+  /* Styles for the dark theme */
+  --background-color: #333;
+  --text-color: #fff;
+}
+
+body {
+  background-color: var(--background-color, #fff);
+  color: var(--text-color, #000);
+}

@@ -5,13 +5,25 @@ import loginContext from '../Store/Login-Context';
 import ExpenseForm from '../Components/ExpenseForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../Redux-Store';
+import { ThemeReducer } from '../Redux-Store/ThemeReducer';
+import { useReducer } from 'react';
+import { useState } from 'react';
 
-const Welcome = () => {
+const Welcome = ({ onToggleTheme }) => {
   const navigate = useNavigate();
   const logincntx = useContext(loginContext);
   const dispatch = useDispatch();
   const expenses = useSelector((state) => state.expenses);
-  console.log('expenses',expenses);
+  const [isPremiumActive, setIsPremiumActive] = useState(false);
+  const [state, dispatchh] = useReducer(ThemeReducer, { darkTheme: false });
+
+  const handleActivatePremium = () => {
+    setIsPremiumActive(true);
+  };
+  
+  
+  
+  
 
   const loginHandler = () => {
     if (!logincntx.isloggedIn) {
@@ -24,6 +36,7 @@ const Welcome = () => {
     dispatch(authActions.logout());
     navigate('/');
   };
+  
 
   return (
     <>
@@ -38,8 +51,10 @@ const Welcome = () => {
             <Link to="/Profile">Complete Now</Link>
           </span>
         </span>
+        
+    {isPremiumActive && <button onClick={onToggleTheme}>Toggle Theme</button>}
       </div>
-      <ExpenseForm className={classes.form} />
+      <ExpenseForm className={classes.form} onActivatePremium={handleActivatePremium} />
       
     </>
   );
