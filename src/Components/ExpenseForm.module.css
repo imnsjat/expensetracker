@@ -65,3 +65,23 @@
     appearance:none; /* Remove default arrow in some browsers */
     background-size: 30px; /* Set the size of the arrow icon */
   }
+
+  .premiumbutton {
+    background-color: #ff5e00;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .premiumbutton:hover {
+    background-color: #17b824;
+  }
+  
+  .premiumbutton:active {
+    background-color: #00567a;
+  }

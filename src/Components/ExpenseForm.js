@@ -13,6 +13,14 @@ const ExpenseForm = ()=> {
   const [editMode, setEditMode] = useState(false);
   const [editId, setEditId] = useState(null);
 
+  const [totalExpenses, setTotalExpenses] = useState(0);
+
+  useEffect(() => {
+    setTotalExpenses(
+      expenses.reduce((total, expense) => total + Number(expense.amount), 0)
+    );
+  }, [expenses]);
+
   useEffect(  () => {
     const fetchdata = async ()=>{
       let url;
@@ -22,7 +30,7 @@ const ExpenseForm = ()=> {
         if (res.ok) {
           const data = await res.json();
           console.log('FETCHED DATA',data);
-          setExpenses(Object.values(data));
+          setExpenses(Object.entries(data).map(([id, expense]) => ({ ...expense, id })));
         } else {
           const data = await res.json();
           throw new Error(data.error.message);
@@ -78,6 +86,7 @@ const ExpenseForm = ()=> {
   };
 
   const handleDelete = async (id) => {
+    console.log('delete id',id);
     let url;
     url = `https://expensetracker-b01cb-default-rtdb.firebaseio.com/expenses/${id}.json`;
 
@@ -165,10 +174,12 @@ const ExpenseForm = ()=> {
           <option value="other">Other</option>
         </select>
       </div>
-      <button type="submit">{editMode ? 'Update' : 'Add'}Expense</button>
+      <button type="submit">{editMode ? 'Update' : 'Add'}  Expense</button>
     </form>
     {expenses !== null && (
-        <>
+        <> {totalExpenses > 10000 && (
+          <button className={classes.premiumbutton}>Activate Premium</button>
+        )}
           <h2>Expenses:</h2>
           {expenses.map((expense, index) => (
             <div key={index}>
