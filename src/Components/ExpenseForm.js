@@ -210,16 +210,16 @@ const ExpenseForm = ({ onActivatePremium })=> {
           <button className={classes.premiumbutton} onClick={handleActivatePremium}>Activate Premium</button>
         )}
         
-    {isPremiumActive && <button onClick={handleDownloadExpenses}>Download Expenses</button>}
-          <h2>Expenses:</h2>
+    {isPremiumActive && <button className={classes.dnbutton} onClick={handleDownloadExpenses}>Download Expenses</button>}
+          <h2 className={classes.h2}>Expenses:</h2>
           {expenses.map((expense, index) => (
-            <div key={index}>
-              <p>Amount: {expense.amount}</p>
-              <p>Description: {expense.description}</p>
-              <p>Category: {expense.category}</p>
-              <button onClick={() => handleDelete(expense.id)}>Delete</button>
+            <div key={index} className={classes.expenserow}>
+              <p  className={classes.expenseamount}>Amount: Rs.{expense.amount}</p>
+              <p  className={classes.expensedescription}>Description: {expense.description}</p>
+              <p  className={classes.expensecategory}>Category: {expense.category}</p>
+              <button onClick={() => handleDelete(expense.id)} className={classes.deletebutton} >Delete</button>
               {!editMode && (
-                <button onClick={() => handleEdit(expense.id)}>Edit</button>
+                <button onClick={() => handleEdit(expense.id)} className={classes.editbutton}>Edit</button>
               )}
               <hr />
             </div>

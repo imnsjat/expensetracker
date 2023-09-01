@@ -1,12 +1,11 @@
 .form{
-    margin-top: 20px;
-    padding-top: 2%;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px #042417;
-    /* background-color: #000000; */
+  margin-top: 20px;
+  padding-top: 2%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px #042417;
 }
 
 .form label {
@@ -67,6 +66,8 @@
   }
 
   .premiumbutton {
+    margin-left: 40%;
+    margin-top: 10px;
     background-color: #ff5e00;
     color: #fff;
     border-radius: 20px;
@@ -84,4 +85,58 @@
   
   .premiumbutton:active {
     background-color: #00567a;
+  }
+  .h2{
+    
+    margin-left: 20%;
+  }
+  .expenserow {
+    margin-left: 20%;
+    display: flex;
+    gap: 1em;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+  
+  .expenseamount {
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  
+  .expensedescription {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+  }
+  
+  .expensecategory {
+    /* font-size: 12px; */
+    font-weight: bold;
+  }
+  
+  .deletebutton {
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 0px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .dnbutton {
+    background-color: #741a98cf;
+     margin-left: 10%;
+     font-size: 20px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .editbutton {
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
   }

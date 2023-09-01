@@ -44,6 +44,26 @@
   .button:active {
     transform: scale(0.95);
   }
+  .tglbutton {
+    width: auto;
+    color: rgb(79, 43, 158);
+    font-size: 25px;
+    margin-top: 30px;
+    padding: 8px 30px 8px 30px;
+    border-radius: 25px;
+    border: none;
+    background-color: #ccc;
+    /* box-shadow: 0 0 10px rgb(133, 255, 58); */
+  }
+  
+  .tglbutton:hover {
+    background-color: #000000;
+    color: rgb(255, 255, 96);
+  }
+  
+  .tglbutton:active {
+    transform: scale(0.95);
+  }
 
   .form button {
     width: 100%;

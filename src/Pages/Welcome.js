@@ -52,7 +52,7 @@ const Welcome = ({ onToggleTheme }) => {
           </span>
         </span>
         
-    {isPremiumActive && <button onClick={onToggleTheme}>Toggle Theme</button>}
+    {isPremiumActive && <button className={classes.tglbutton} onClick={onToggleTheme}>Toggle Theme</button>}
       </div>
       <ExpenseForm className={classes.form} onActivatePremium={handleActivatePremium} />
       
