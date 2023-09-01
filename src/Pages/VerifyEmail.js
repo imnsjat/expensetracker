@@ -7,6 +7,8 @@ const   VerifyEmail = ()=>{
     //   const navigate = useNavigate();
       const loginCtx = useContext(loginContext);
       const code = useRef();
+      
+      // console.log(code.current.value);
       const navigate = useNavigate();
       
       const getCodeHandler = async () =>{
