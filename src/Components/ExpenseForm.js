@@ -9,6 +9,9 @@ const ExpenseForm = ()=> {
     category: 'food',
   });
   const [expenses, setExpenses] = useState([]);
+  
+  const [editMode, setEditMode] = useState(false);
+  const [editId, setEditId] = useState(null);
 
   useEffect(  () => {
     const fetchdata = async ()=>{
@@ -74,9 +77,76 @@ const ExpenseForm = ()=> {
     }));
   };
 
+  const handleDelete = async (id) => {
+    let url;
+    url = `https://expensetracker-b01cb-default-rtdb.firebaseio.com/expenses/${id}.json`;
+
+    try {
+      const res = await fetch(url, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        console.log('Expense successfully deleted');
+        setExpenses((prevState) =>
+          prevState.filter((expense) => expense.id !== id)
+        );
+      } else {
+        const data = await res.json();
+        throw new Error(data.error.message);
+      }
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+
+  const handleEdit = (id) => {
+    setEditMode(true);
+    setEditId(id);
+    const expenseToEdit = expenses.find((expense) => expense.id === id);
+    setFormData(expenseToEdit);
+  };
+
+  const handleUpdate = async (event) => {
+    event.preventDefault();
+
+    let url;
+    url = `https://expensetracker-b01cb-default-rtdb.firebaseio.com/expenses/${editId}.json`;
+
+    try {
+      const res = await fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (res.ok) {
+        console.log('Expense successfully updated');
+        setExpenses((prevState) =>
+          prevState.map((expense) =>
+            expense.id === editId ? { ...formData, id: editId } : expense
+          )
+        );
+        setEditMode(false);
+        setEditId(null);
+        setFormData({
+          amount: '',
+          description: '',
+          category: 'food',
+        });
+      } else {
+        const data = await res.json();
+        throw new Error(data.error.message);
+      }
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
     return(
         <>
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <form className={classes.form} onSubmit={editMode ? handleUpdate : handleSubmit}>
       <div >
         <label htmlFor="amount" >Amount</label>
         <input type="number" className={classes.input}  onChange={handleChange} value={formData.amount} id='amount' required />
@@ -95,7 +165,7 @@ const ExpenseForm = ()=> {
           <option value="other">Other</option>
         </select>
       </div>
-      <button type="submit" >Add Expense</button>
+      <button type="submit">{editMode ? 'Update' : 'Add'}Expense</button>
     </form>
     {expenses !== null && (
         <>
@@ -105,6 +175,10 @@ const ExpenseForm = ()=> {
               <p>Amount: {expense.amount}</p>
               <p>Description: {expense.description}</p>
               <p>Category: {expense.category}</p>
+              <button onClick={() => handleDelete(expense.id)}>Delete</button>
+              {!editMode && (
+                <button onClick={() => handleEdit(expense.id)}>Edit</button>
+              )}
               <hr />
             </div>
           ))}
