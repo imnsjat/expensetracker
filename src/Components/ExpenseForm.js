@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classes from './ExpenseForm.module.css'
 
 const ExpenseForm = ()=> {
@@ -9,15 +9,64 @@ const ExpenseForm = ()=> {
     category: 'food',
   });
   const [expenses, setExpenses] = useState([]);
-  const handleSubmit = (event) => {
+
+  useEffect(  () => {
+    const fetchdata = async ()=>{
+      let url;
+      url ="https://expensetracker-b01cb-default-rtdb.firebaseio.com/expenses.json";
+      try {
+        const res = await fetch(url);
+        if (res.ok) {
+          const data = await res.json();
+          console.log('FETCHED DATA',data);
+          setExpenses(Object.values(data));
+        } else {
+          const data = await res.json();
+          throw new Error(data.error.message);
+        }
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+    fetchdata();
+    
+  }, []);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setExpenses((prevState) => [...prevState, formData]);
-    setFormData({
-      amount: '',
-      description: '',
-      category: 'food',
-    });
-  };
+
+    let url;
+      url ="https://expensetracker-b01cb-default-rtdb.firebaseio.com/expenses.json";
+
+      try {
+        const res = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (res.ok) {
+        
+          const data = await res.json();
+          console.log('added to db',data);
+          setExpenses((prevState) => [...prevState,  {...formData, id: data.name}]);
+          setFormData({
+            amount: '',
+            description: '',
+            category: 'food',
+          });
+
+        } else {
+          const data = await res.json();
+          throw new Error(data.error.message);
+        }
+      } catch (err) {
+        alert(err.message);
+      }
+  }; 
+
+      
   const handleChange = (event) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -48,7 +97,7 @@ const ExpenseForm = ()=> {
       </div>
       <button type="submit" >Add Expense</button>
     </form>
-    {expenses.length > 0 && (
+    {expenses !== null && (
         <>
           <h2>Expenses:</h2>
           {expenses.map((expense, index) => (
